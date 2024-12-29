@@ -1,29 +1,34 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 const appointments = [
-  { id: 1, patient: 'John Doe', time: '09:00 AM', type: 'Check-up' },
-  { id: 2, patient: 'Jane Smith', time: '10:30 AM', type: 'Follow-up' },
-  { id: 3, patient: 'Bob Johnson', time: '02:00 PM', type: 'Consultation' },
+  { id: 1, patient: 'John Doe', time: '09:00 AM', type: 'Check-up', avatar: '/placeholder.svg?height=32&width=32' },
+  { id: 2, patient: 'Jane Smith', time: '10:30 AM', type: 'Follow-up', avatar: '/placeholder.svg?height=32&width=32' },
+  { id: 3, patient: 'Bob Johnson', time: '02:00 PM', type: 'Consultation', avatar: '/placeholder.svg?height=32&width=32' },
 ]
 
 export function AppointmentList() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg font-semibold">Today's Appointments</CardTitle>
+        <CardTitle>Today's Appointments</CardTitle>
       </CardHeader>
       <CardContent>
-        <ul className="space-y-4">
+        <div className="space-y-8">
           {appointments.map((appointment) => (
-            <li key={appointment.id} className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-              <div>
-                <p className="font-medium text-foreground">{appointment.patient}</p>
+            <div key={appointment.id} className="flex items-center">
+              <Avatar className="h-9 w-9">
+                <AvatarImage src={appointment.avatar} alt={appointment.patient} />
+                <AvatarFallback>{appointment.patient.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+              </Avatar>
+              <div className="ml-4 space-y-1">
+                <p className="text-sm font-medium leading-none">{appointment.patient}</p>
                 <p className="text-sm text-muted-foreground">{appointment.type}</p>
               </div>
-              <p className="text-sm text-muted-foreground mt-1 sm:mt-0">{appointment.time}</p>
-            </li>
+              <div className="ml-auto font-medium">{appointment.time}</div>
+            </div>
           ))}
-        </ul>
+        </div>
       </CardContent>
     </Card>
   )
