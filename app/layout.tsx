@@ -1,7 +1,7 @@
 import { Sidebar } from '@/components/sidebar'
 import '@/app/globals.css'
 
-export default function DashboardLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode

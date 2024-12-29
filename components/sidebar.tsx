@@ -2,7 +2,9 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Home, Calendar, Users, FileText, Settings, Menu, X } from 'lucide-react'
+import { Home, Calendar, Users, FileText, Settings, Menu } from 'lucide-react'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Button } from '@/components/ui/button'
 
 const navItems = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
@@ -13,38 +15,50 @@ const navItems = [
 ]
 
 export function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [open, setOpen] = useState(false)
 
-  return (
-    <>
-      <button
-        className="lg:hidden fixed top-4 left-4 z-20 p-2 bg-primary text-primary-foreground rounded-md"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
-      <aside className={`
-        fixed inset-y-0 left-0 z-10 w-64 bg-card text-card-foreground shadow-md transform transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-        lg:relative lg:translate-x-0
-      `}>
-        <div className="p-4">
-          <h2 className="text-2xl font-bold text-primary">Dr. Dashboard</h2>
-        </div>
-        <nav className="mt-6">
+  const NavContent = () => (
+    <div className="space-y-4 py-4">
+      <div className="px-3 py-2">
+        <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
+          Dr. Dashboard
+        </h2>
+        <div className="space-y-1">
           {navItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="flex items-center px-4 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-              onClick={() => setIsOpen(false)}
+              onClick={() => setOpen(false)}
             >
-              <item.icon className="mr-3 h-5 w-5" />
-              {item.name}
+              <Button variant="ghost" className="w-full justify-start">
+                <item.icon className="mr-2 h-4 w-4" />
+                {item.name}
+              </Button>
             </Link>
           ))}
-        </nav>
-      </aside>
+        </div>
+      </div>
+    </div>
+  )
+
+  return (
+    <>
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetTrigger asChild>
+          <Button variant="outline" size="icon" className="lg:hidden fixed top-4 left-4 z-40">
+            <Menu className="h-4 w-4" />
+            <span className="sr-only">Toggle navigation menu</span>
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="w-64 p-0">
+          <NavContent />
+        </SheetContent>
+      </Sheet>
+      <div className="hidden lg:block">
+        <div className="h-full w-64 border-r bg-background">
+          <NavContent />
+        </div>
+      </div>
     </>
   )
 }
