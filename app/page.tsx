@@ -6,8 +6,8 @@ import { UpcomingSchedule } from '@/components/upcoming-schedule'
 export default function DashboardPage() {
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-foreground">Welcome, Dr. Smith</h1>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <h1 className="text-2xl lg:text-3xl font-bold text-foreground">Welcome, Dr. Smith</h1>
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Patients</CardTitle>
@@ -41,7 +41,7 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 grid-cols-1 lg:grid-cols-3">
         <AppointmentList />
         <PatientList />
         <UpcomingSchedule />
