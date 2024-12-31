@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Calendar, Menu, X } from 'lucide-react'
+import { Home, Calendar, Users, Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
@@ -11,6 +11,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 const navItems = [
   { name: 'Home', href: '/', icon: Home },
   { name: 'Appointments', href: '/appointments', icon: Calendar },
+  { name: 'Patients', href: '/patients', icon: Users },
 ]
 
 export function Sidebar() {
